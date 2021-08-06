@@ -1,0 +1,243 @@
+package guis;
+
+import java.awt.EventQueue;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+
+import java.awt.Color;
+import java.awt.Font;
+
+public class _21_MendoPaz extends JFrame implements Runnable {
+
+	private static final long serialVersionUID = 1L;
+	
+	private JPanel contentPane;
+	private JLabel lblLema;
+	private JLabel lblFF;
+	private JLabel lblPI;
+	private JLabel lblPF;
+	private JLabel lblPP;
+	private JLabel lblAudi;
+	private JLabel lblFondo;
+	
+	Thread hilo;
+	
+	int contador = 0;
+	
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					_21_MendoPaz frame = new _21_MendoPaz();
+					frame.setVisible(true);
+				}
+				catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public _21_MendoPaz() {
+		int ANCHO = 800, ALTO = 600,
+			DX = 13, DY = 31;
+		
+		setResizable(false);
+		setTitle("Mendo Paz SRL (En homenaje a mis padres)");
+		setIconImage(new ImageIcon("imagenes/PrimaTaxi.png").getImage());
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setSize(ANCHO + DX, ALTO + DY);
+		this.setLocationRelativeTo(null);
+		
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		lblLema = new JLabel();
+		lblLema.setForeground(Color.WHITE);
+		lblLema.setFont(new Font("Arial", Font.PLAIN, 20));
+		lblLema.setHorizontalAlignment(0);
+		lblLema.setBounds(0, 0, ANCHO, 58);
+		contentPane.add(lblLema);
+
+		lblFF = new JLabel("Feb 2023");
+		lblFF.setForeground(Color.ORANGE);
+		lblFF.setFont(new Font("Arial", Font.BOLD, 15));
+		lblFF.setBounds(710, 70, 70, 20);
+		contentPane.add(lblFF);
+
+		lblPI = new JLabel();
+		lblPI.setToolTipText(estilo(252.0256*porcentaje()));
+		lblPI.setBounds(60, 100, dxI(), 310);
+		contentPane.add(lblPI);
+			
+		lblPF = new JLabel();
+		lblPF.setToolTipText(estilo(252.0256*(100.0-porcentaje())));
+		lblPF.setOpaque(true);
+		lblPF.setBackground(new Color(0, 0, 0, 50));
+		lblPF.setBounds(60 + dxI(), 100, 680 - dxI(), 310);
+		contentPane.add(lblPF);
+	
+		lblPP = new JLabel(ajustar(porcentaje()) + "%");
+		lblPP.setForeground(Color.YELLOW);
+		lblPP.setFont(new Font("Arial", Font.BOLD, 20));
+		lblPP.setHorizontalAlignment(0);
+		lblPP.setBounds(10 + dxI(), 410, 100, 40);
+		contentPane.add(lblPP);
+
+		lblAudi = new JLabel(new ImageIcon("imagenes/Audi.png"));
+		lblAudi.setBounds(59, 100, 680, 310);
+		contentPane.add(lblAudi);	
+		
+		lblFondo = new JLabel(new ImageIcon("imagenes/MendoPaz.png"));
+		lblFondo.setBounds(1, 1, ANCHO, ALTO);
+		getContentPane().add(lblFondo);
+		
+		hilo = new Thread(this);
+ 		hilo.start();
+	}
+	public void run() {
+	 	while (hilo != null)
+	 		try { 
+	 			procesar();
+	 			Thread.sleep(8000);
+	 		}
+	 		catch (Exception e) {
+	 		}
+	}
+	void procesar() {
+		lblLema.setText("\"" + lemaMP() + "\"");
+		contador ++;
+		if (contador == 43)
+			contador = 0;
+	}
+	int dxI() {
+		return (int)Math.round(6.8 * porcentaje());
+	}
+	double porcentaje() {
+		int mm, aa, meses;
+		Calendar c = new GregorianCalendar();
+		mm = c.get(Calendar.MONTH) + 1;
+		aa = c.get(Calendar.YEAR);
+		meses = 12*(aa-2020) + mm - 5;
+		return 100 * (14119.56 + 336.04*meses) / 25202.56;
+	}
+	String lemaMP() {
+		switch (contador) {
+			case  0:
+				return "Coraje es la fuerza que tiene el Ser para no dar su brazo a torcer.";
+			case  1:
+				return "Haciendo algo distinto, lograremos distinguirnos entre los demás.";
+			case  2:
+				return "Una buena enseñanza es aquella que nos conduce hacia un gran cambio.";
+			case  3:
+				return "La grandeza de una Nación se determina por el éxito de su población.";
+			case  4:
+				return "Comunicación y entendimiento es el primer paso para toda gran acción.";
+			case  5:
+				return "No se preocupe por el futuro de su esfuerzo y continúe con su trabajo.";
+			case  6:
+				return "Sólo quienes dan un paso adelante viven la esperanza y la oportunidad.";
+			case  7:
+				return "Trabajar con dignidad significa respetar nuestro principio de lealtad.";
+			case  8:
+				return "Suerte es la palabra equivocada cuando el ‘éxito’ sustituye al riesgo.";
+			case  9:
+				return "Debemos ser perseverantes si queremos escuchar del éxito una respuesta.";
+			case 10:
+				return "Persistir ante un obstáculo es más glorioso que pasarlo sin sacrificio.";
+			case 11:
+				return "Bondadoso es aquel Hombre que ayuda con el ejemplo y da con el corazón.";
+			case 12:
+				return "Busquemos siempre una alternativa más, pero no abandonemos a las demás.";
+			case 13:
+				return "La mente determina los actos, pero es el impulso lo que hace la acción.";
+			case 14:
+				return "Hagamos que los verbos crear e innovar sean ejercicios diarios de vida.";
+			case 15:
+				return "La humildad es una virtud que no debemos descuidar, mucho menos olvidar.";
+			case 16:
+				return "Quien no da un paso adelante vive sólo de la esperanza y la oportunidad.";
+			case 17:
+				return "El talento es bendición Divina. Una gota de sabiduría puesta en el Ser.";
+			case 18:
+				return "Vivir, crear y difundir es motivarse a continuar por el camino correcto.";
+			case 19:
+				return "El conocimiento te vuelve inteligente. El razonamiento te hace diferente.";
+			case 20:
+				return "Para aceptar el cambio no debemos esperar a que el mundo lo haga primero.";
+			case 21:
+				return "Contribuir con el desarrollo es fortalecer las bases de toda edificación.";
+			case 22:
+				return "Ser tenaz en nuestro trabajo es hacerlo con esfuerzo, ahínco y dedicación.";
+			case 23:
+				return "Si queremos hacer algo y empezamos ya, habremos vencido el problema mayor.";
+			case 24:
+				return "No interesa cuán difícil sea un problema si buscamos siempre una solución.";
+			case 25:
+				return "El don de la virtud es la joya más valiosa que Dios puede darle al hombre.";
+			case 26:
+				return "No nos preocupemos por cometer errores, sólo evitemos cometerlos otra vez.";
+			case 27:
+				return "Vivimos en un mundo de evolución permanente. Por eso, aceptemos el cambio.";
+			case 28:
+				return "El Ser por naturaleza busca algo más, y por lo general encuentra algo más.";
+			case 29:
+				return "Sólo porque el mundo cambia, aprovecha la oportunidad y cambia tú también.";
+			case 30:
+				return "Admitiendo la posibilidad de un error, estaremos preparados para aceptarlo.";
+			case 31:
+				return "El hombre perseverante y el hombre testarudo tienen en común: la terquedad.";
+			case 32:
+				return "El líder no mide las consecuencias de un posible fracaso, sólo las analiza.";
+			case 33:
+				return "La iniciativa es la voluntad para transformar a la creatividad en creación.";
+			case 34:
+				return "La grandeza de nuestro Perú está en la voluntad y en el deseo de progresar.";
+			case 35:
+				return "Esfuérzate por ser mejor y verás que sólo tú eres el artífice de tu destino.";
+			case 36:
+				return "Ilusión es la alegría que los seres humanos sentimos al momento de imaginar.";
+			case 37:
+				return "Un hombre y su trabajo serán productivos, si logran reflejarse en los demás.";
+			case 38:
+				return "Florezca su talento creativo y no deje que el talento por sí le eche flores.";
+			case 39:
+				return "Lo que queremos y podemos hacer no debe ser discutido: simplemente hagámoslo.";
+			case 40:
+				return "Si queremos lograr el éxito, debemos apurarnos por llegar a la meta y empezar.";
+			case 41:
+				return "La enseñanza logra su objetivo cuando hace del aprendizaje un hábito natural.";
+			default:
+				return "El hombre busca siempre una explicación, y encuentra en Dios una buena razón.";
+		}
+	}
+	public double ajustar(double num) {
+		return (int)Math.round(num*100)/100.0;
+	}
+	public String estilo(double num) {
+		String numero = "" + (int)Math.round(num*100), s = "";
+		int j = 1;
+		for (int i=numero.length()-1; i>=0; i--) {
+			s = numero.charAt(i) + s;
+			if (j == 2)
+				s = "." + s;
+			if (j == 5)
+				s = "," + s;	
+			j ++;
+		}
+		return s;
+	}
+	
+}
